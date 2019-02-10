@@ -11,6 +11,10 @@ app = Flask(__name__)
 def _weather_url(weather,city,state):
     return weather['weather.host']+weather['weather.token']+weather['weather.query']+"/"+state+"/"+city+".json"    
 
+@app.route('/')
+def index():
+    return render_template("index.html")
+
 @app.route('/weather/<string:city>/<string:state>',methods=['GET'])
 def main(city,state):
     """
