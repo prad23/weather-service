@@ -13,7 +13,7 @@ def _weather_url(weather,city,state):
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return 'Index Page'
 
 @app.route('/weather/<string:city>/<string:state>',methods=['GET'])
 def main(city,state):
