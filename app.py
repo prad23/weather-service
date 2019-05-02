@@ -39,7 +39,12 @@ def main():
             w_resp=client.get_request()
             log.info("Weather response: %s" %w_resp)
             response.append(w_resp)
-        return json.dumps(response)
+        response_body = app.response_class(
+            response_body=json.dumps(body),
+            status = 200,
+            mimetype = 'application/json'
+            )
+        return response_body
     except errors.Error as err:
         log.error("Distance response could not be retrieved: %s" % err)
 
