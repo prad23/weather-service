@@ -22,7 +22,7 @@ def main():
     try:
         loop_var = request.args.getlist('city')
         log.info("Number of arguments in Weather service: %s" % len(loop_var))
-        response = []
+        response_body = []
         for city in loop_var:
             log.info("Weather service is being invoked")
             configLoader = config_loader.ConfigurationLoader()
@@ -38,13 +38,13 @@ def main():
             log.info("Weather url after construction %s,%s " %(client.get_url(),client.get_params()))
             w_resp=client.get_request()
             log.info("Weather response: %s" %w_resp)
-            response.append(w_resp)
-        response_body = app.response_class(
-            response_body=json.dumps(body),
+            response_body.append(w_resp)
+        return_response = app.response_class(
+            response=json.dumps(response_body),
             status = 200,
             mimetype = 'application/json'
             )
-        return response_body
+        return return_response
     except errors.Error as err:
         log.error("Distance response could not be retrieved: %s" % err)
 
