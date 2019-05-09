@@ -20,8 +20,9 @@ def main():
     Response returned is full json body. 
     """
     try:
-        loop_var = request.args.getlist('city')
-        log.info("Number of arguments in Weather service: %s" % len(loop_var))
+        cityIds = request.args.get('city')
+        loop_var = cityIds.split(',')
+        log.info("Number of Cities to invoke Weather service: %s" % len(loop_var))
         response_body = []
         for city in loop_var:
             log.info("Weather service is being invoked")
